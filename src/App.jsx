@@ -1,5 +1,6 @@
 import './Reset.css';
 import GlobalStyle from './globalStyles';
+import { Routes, Route } from 'react-router-dom';
 
 // Importing Pages
 import { Home } from './Pages/Home';
@@ -13,7 +14,11 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Home />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/movie/:id" element={<MovieDetails />} />
+      </Routes>
     </>
   )
 }

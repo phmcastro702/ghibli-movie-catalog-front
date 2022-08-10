@@ -1,8 +1,18 @@
-import styled from "styled-components";
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import config from '../../app-config.json';
 
 
-const APIStatus = ({ apiOnline }) => {
-    
+const APIStatus = () => {
+    const [apiOnline, setApiOnline] = useState(false);
+
+    useEffect(() => {
+        fetch(`${config.api_url}/isOnline`)
+            .then((res) => res.json())
+            .then((resData) => setApiOnline(true))
+            .catch(() => setApiOnline(false));
+    }, []);
+
     return (
         <>
             <StatusMessageContainer>
@@ -27,6 +37,7 @@ const Dot = styled.div`
     background-color: ${props => (props.apiOnline ? '#00ce00' : 'grey')};
     border-radius: 100%;
     width: 20px;
+    
     
 `;
 
