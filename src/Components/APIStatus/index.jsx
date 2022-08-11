@@ -9,7 +9,7 @@ const APIStatus = () => {
     useEffect(() => {
         fetch(`${config.api_url}/isOnline`)
             .then((res) => res.json())
-            .then((resData) => setApiOnline(true))
+            .then((resData) => setApiOnline(resData.success))
             .catch(() => setApiOnline(false));
     }, []);
 
@@ -17,7 +17,9 @@ const APIStatus = () => {
         <>
             <StatusMessageContainer>
                 <StatusText>API {apiOnline ? 'Online' : 'Offline'}</StatusText>
-                <Dot apiOnline={apiOnline} />
+                <DotContainer>
+                    <Dot apiOnline={apiOnline} />
+                </DotContainer>
             </StatusMessageContainer>
         </>
     );
@@ -30,6 +32,7 @@ const StatusMessageContainer = styled.div`
     display: flex;
     gap: 1em;
     position: absolute;
+    align-items: center;
  
 `;
 
@@ -37,12 +40,18 @@ const Dot = styled.div`
     background-color: ${props => (props.apiOnline ? '#00ce00' : 'grey')};
     border-radius: 100%;
     width: 20px;
+    height: 20px;
     
     
 `;
 
+const DotContainer = styled.div`
+    /* display: flex; */
+    width: 30%;
+`;
+
 const StatusText = styled.p`
-    width: 100%;
+    width: 150%;
 `;
 
 
