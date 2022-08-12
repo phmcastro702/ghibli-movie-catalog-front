@@ -4,6 +4,7 @@ import config from '../../app-config.json';
 
 import { MovieCard } from '../MovieCard';
 import { Paginator } from '../Paginator';
+import { LoadingTopBar } from '../LoadingTopBar';
 
 
 
@@ -13,9 +14,14 @@ const MoviesList = () => {
         currentPage: 1,
         totalPages: 1
     });
+    const [isLoading, setIsLoading] = useState(true);
 
 
     function getMovieDataFromAPI(page) {
+
+        if (!isLoading)
+            setIsLoading(true);
+
         fetch(`${config.api_url}/movies/paginate/${page}`)
             .then((res) => res.json())
             .then((resData) => {
@@ -25,8 +31,13 @@ const MoviesList = () => {
                     totalPages: resData.totalPages,
                     updatePage: getMovieDataFromAPI
                 });
+                setIsLoading(false);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                setIsLoading(false);
+            });
+
     }
 
     function nextPage() {
@@ -43,6 +54,24 @@ const MoviesList = () => {
         }
     }
 
+    function refreshMoviesDB() {
+
+        setIsLoading(true);
+
+        fetch(`${config.api_url}/movies`)
+            .then((res) => res.json())
+            .then((resData) => {
+                if (resData.success) {
+                    getMovieDataFromAPI(pagesData.currentPage);
+                    return;
+                }
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setIsLoading(false);
+            });
+    }
 
     useEffect(() => {
         if (moviesData.length)
@@ -54,12 +83,15 @@ const MoviesList = () => {
 
 
     return (
-        <MovieListContainer>
-            <ListTitle>Ghibli Movies Catalog</ListTitle>
-            <RefreshButton>Atualizar</RefreshButton>
-            {moviesData.map((movie) => { return <MovieCard key={movie.id} movieData={movie} />; })}
-            <Paginator pagesData={pagesData} nextPage={nextPage} previousPage={previousPage} />
-        </MovieListContainer>
+        <>
+            <LoadingTopBar loading={isLoading} />
+            <MovieListContainer>
+                <ListTitle>Ghibli Movies Catalog</ListTitle>
+                <RefreshButton onClick={refreshMoviesDB}>Atualizar</RefreshButton>
+                {moviesData.map((movie) => { return <MovieCard key={movie.id} movieData={movie} />; })}
+                <Paginator pagesData={pagesData} nextPage={nextPage} previousPage={previousPage} />
+            </MovieListContainer>
+        </>
     );
 };
 

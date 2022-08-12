@@ -7,6 +7,7 @@ const MovieCard = ({ movieData }) => {
         <>
             <MovieCardContainer>
                 <MovieCardImage src={movieData.banner} alt={`Banner do filme ${movieData.title}`} />
+                <UpdatedAt>Atualizado em: {movieData.updatedAt}</UpdatedAt>
                 <Title>
                     {movieData.title}
                 </Title>
@@ -63,6 +64,12 @@ const Description = styled.p`
 
 `;
 
+const UpdatedAt = styled.p`
+    font-size: 12px;
+    font-weight: 200;
+    padding-top: 10px;
+`;
+
 const Role = styled.p`
     font-weight: 500;
     @media screen and (min-width: 1024px) {
@@ -70,7 +77,7 @@ const Role = styled.p`
     }
 `;
 
-const RoleContainer = styled.p`
+const RoleContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 8%;
