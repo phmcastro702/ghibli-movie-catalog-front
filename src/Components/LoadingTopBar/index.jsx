@@ -15,7 +15,7 @@ const LoadingContainer = styled.div`
     top: -.5%;
     width: 99.9%;
     height: 3vh;
-    background: url('public/workingLittleSpiders.gif') center center;
+    background: url('/workingLittleSpiders.gif') center center;
     background-size: contain;
 
     @media screen and (min-width: 1024px) {
