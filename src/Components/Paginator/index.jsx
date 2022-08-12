@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-
+// Componente 'paginador' com botões de navegação e indicador de página atual
 const Paginator = ({ pagesData, nextPage, previousPage }) => {
 
     return (

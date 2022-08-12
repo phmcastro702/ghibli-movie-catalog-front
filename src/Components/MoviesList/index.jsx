@@ -7,16 +7,20 @@ import { Paginator } from '../Paginator';
 import { LoadingTopBar } from '../LoadingTopBar';
 
 
-
+// Componente de lista de filmes
 const MoviesList = () => {
+    // Estado para guardar dados de filmes consumidos do backend
     const [moviesData, setMoviesData] = useState([]);
+    // Estado para guardar dados essenciais para paginação
     const [pagesData, setPagesData] = useState({
         currentPage: 1,
         totalPages: 1
     });
+    
     const [isLoading, setIsLoading] = useState(true);
 
-
+    // Consulta um endpoint da API para obter dados de filmes
+    // com paginação enviando o numero da pagina
     function getMovieDataFromAPI(page) {
 
         if (!isLoading)
@@ -40,13 +44,14 @@ const MoviesList = () => {
 
     }
 
+    // Funções para atualizar paginação
+    // Verifica se a paginação é válida e faz o scroll para o topo da página
     function nextPage() {
         if (pagesData.currentPage < pagesData.totalPages) {
             getMovieDataFromAPI(++pagesData.currentPage);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
-
     function previousPage() {
         if (pagesData.currentPage > 1) {
             getMovieDataFromAPI(--pagesData.currentPage);
@@ -54,6 +59,8 @@ const MoviesList = () => {
         }
     }
 
+    // Chamada pelo botão 'Atualizar'
+    // Chama endpoint de atualização de filmes no backend e atualiza a lista de filmes
     function refreshMoviesDB() {
 
         setIsLoading(true);

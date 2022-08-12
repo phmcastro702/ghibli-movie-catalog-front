@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-
+// Component card de cada filme
+// Recebe a prop 'movieData' com os dados do filme
 const MovieCard = ({ movieData }) => {
 
     return (

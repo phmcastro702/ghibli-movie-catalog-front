@@ -1,8 +1,7 @@
-import styled from "styled-components";
 import { HomeHero } from "../../Components/HomeHero";
 import { APIStatus } from '../../Components/APIStatus';
-import { useEffect, useState } from "react";
 
+// Component da página Home que mostra o status da API e um logo animado
 const Home = () => {
 
     return (

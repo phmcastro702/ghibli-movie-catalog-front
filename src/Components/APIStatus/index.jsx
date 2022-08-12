@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import config from '../../app-config.json';
 
-
+// Componente indicador de status da API
 const APIStatus = () => {
     const [apiOnline, setApiOnline] = useState(false);
 
+    // Consulta um endpoint da API para verificar se está online
     useEffect(() => {
         fetch(`${config.api_url}/isOnline`)
             .then((res) => res.json())
@@ -46,7 +47,6 @@ const Dot = styled.div`
 `;
 
 const DotContainer = styled.div`
-    /* display: flex; */
     width: 30%;
 `;
 

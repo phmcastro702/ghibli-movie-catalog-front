@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import logoGif from '../../Assets/gifs/ghibliLogo.gif';
 
+// 'Hero' do site com o logo e o botão para entrar na pagina de catalogo
 const HomeHero = () => {
     const navigate = useNavigate();
 

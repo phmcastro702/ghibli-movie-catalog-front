@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-
+// Componente de barra de carregamento independente
+// Recebe a prop 'loading' mostrar ou não o componente
 const LoadingTopBar = ({ loading }) => {
-
+    
     return (
         <LoadingContainer hidden={!loading} />
     );
