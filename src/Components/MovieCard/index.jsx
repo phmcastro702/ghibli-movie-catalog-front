@@ -7,12 +7,20 @@ const MovieCard = ({ movieData }) => {
         <>
             <MovieCardContainer>
                 <MovieCardImage src={movieData.banner} alt={`Banner do filme ${movieData.title}`} />
-                <MovieCardTitle>
+                <Title>
                     {movieData.title}
-                </MovieCardTitle>
-                <MovieCardDescription>
-                    {movieData.description.substr(0, 255) + '...'}
-                </MovieCardDescription>
+                </Title>
+                <RoleContainer>
+                    <Role>Director: {movieData.director}</Role>
+                    <Role>Producer: {movieData.producer}</Role>
+                </RoleContainer>
+                <Description>
+                    {
+                        (movieData.description.length > 255)
+                            ? movieData.description.substr(0, 255) + '...'
+                            : movieData.description
+                    }
+                </Description>
             </MovieCardContainer>
         </>
     );
@@ -29,20 +37,44 @@ const MovieCardContainer = styled.div`
     border-radius: 10px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 
+    @media screen and (min-width: 1024px) {
+        width: 90%;
+        height: 95%;
+
+    }
+
 `;
 
 const MovieCardImage = styled.img`
     width: 70%;
 `;
 
-const MovieCardTitle = styled.h3`
+const Title = styled.h3`
     padding: 5% 0;
     font-weight: 500;
     font-size: 20px;
+
+    @media screen and (min-width: 1024px) {
+        font-size: 22px;
+    }
 `;
 
-const MovieCardDescription = styled.p`
+const Description = styled.p`
 
+`;
+
+const Role = styled.p`
+    font-weight: 500;
+    @media screen and (min-width: 1024px) {
+        font-size: 20px;
+    }
+`;
+
+const RoleContainer = styled.p`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8%;
+    gap: 10px;
 `;
 
 
